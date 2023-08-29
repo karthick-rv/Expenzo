@@ -1,14 +1,18 @@
 
 
+import 'dart:math';
+
 import 'package:expenzo/core/resources/data_state.dart';
 import 'package:expenzo/features/expense/data/expense.dart';
 import 'package:expenzo/features/expense/data/expense_repository.dart';
 
 class ExpenseRepositoryImpl extends ExpenseRepository{
+
+  List<Expense> expenseList = [];
+
   @override
-  Future<DataState<List<Expense>>> addExpense(Expense expense) {
-    // TODO: implement addExpense
-    throw UnimplementedError();
+  void addExpense(Expense expense) {
+     expenseList.add(expense);
   }
 
   @override
@@ -19,8 +23,7 @@ class ExpenseRepositoryImpl extends ExpenseRepository{
 
   @override
   Future<DataState<List<Expense>>> getExpenses() {
-    // TODO: implement getExpenses
-    throw UnimplementedError();
+    return Future.value(DataSuccess(expenseList));
   }
 
 }
