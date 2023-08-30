@@ -16,19 +16,19 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState>{
   }
 
   void onGetExpenses(GetExpenses event, Emitter<ExpenseState> emitter) async {
-    await _getExpenses();
+    await _emitExpenses();
   }
 
   void onAddExpense(AddExpense event , Emitter<ExpenseState> emitter) async {
     expenseRepository.addExpense(event.expense!);
-    await _getExpenses();
+    // await _emitExpenses();
   }
 
-  _getExpenses() async{
+  _emitExpenses() async{
     final dataState = await expenseRepository.getExpenses();
 
     if(dataState is DataSuccess && dataState.data!.isNotEmpty){
-      emit(ExpenseSuccess(dataState.data!));
+      emit(ExpenseSuccess(List.from(dataState.data!)));
     }
 
     if(dataState is DataFailed){

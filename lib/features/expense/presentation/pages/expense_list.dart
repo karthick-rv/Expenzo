@@ -1,4 +1,5 @@
 import 'package:expenzo/features/expense/presentation/bloc/expense_bloc.dart';
+import 'package:expenzo/features/expense/presentation/bloc/expense_event.dart';
 import 'package:expenzo/features/expense/presentation/bloc/expense_state.dart';
 import 'package:expenzo/features/expense/presentation/pages/add_expense.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,17 @@ class ExpenseListState extends State {
     );
   }
 
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchExpenses();
+  }
+
+  _fetchExpenses() {
+    context.read<ExpenseBloc>().add(const GetExpenses());
+  }
+
   AppBar buildAppbar() {
     return AppBar(
       title: const Text('Your Expenses'),
@@ -31,7 +43,10 @@ class ExpenseListState extends State {
   Widget buildBody() {
     return BlocBuilder<ExpenseBloc, ExpenseState>(builder: (context, state) {
       return Column(
-        children: [topBar(), expenseList(state)],
+        children: [
+          topBar(),
+          expenseList(state)
+        ],
       );
     });
   }
@@ -85,7 +100,9 @@ class ExpenseListState extends State {
                 MaterialPageRoute(
                   builder: (context) => const AddExpensePage(),
                 ),
-              );
+              ).whenComplete((){
+                _fetchExpenses();
+              });
             },
             child: const Text(
               "Add Expense",

@@ -1,11 +1,18 @@
-class Expense {
-  String name = "";
-  String? description = "";
-  int amount = 0;
-  DateTime date = DateTime.now();
-  ExpenseCategory category = ExpenseCategory.miscellaneous;
+import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
-  Expense({required this.name,this.description, required this.amount, required this.date, required this.category});
+class Expense extends Equatable {
+  final UniqueKey id = UniqueKey();
+  final String name;
+  final String? description;
+  final int amount;
+  DateTime date = DateTime.now();
+  final ExpenseCategory category ;
+
+  Expense({this.name = "",this.description = "", this.amount = 0, required this.date, this.category = ExpenseCategory.miscellaneous});
+
+  @override
+  List<Object?> get props => [name];
 }
 
 

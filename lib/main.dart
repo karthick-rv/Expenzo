@@ -4,7 +4,6 @@ import 'package:expenzo/features/expense/presentation/pages/expense_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -17,7 +16,8 @@ class MyApp extends StatelessWidget {
     return RepositoryProvider(
         create: (context) => ExpenseRepositoryImpl(),
         child: BlocProvider(
-          create: (context) => ExpenseBloc(context.read<ExpenseRepositoryImpl>()),
+          create: (context) =>
+              ExpenseBloc(context.read<ExpenseRepositoryImpl>()),
           child: MaterialApp(
             title: 'Flutter Demo',
             theme: ThemeData(

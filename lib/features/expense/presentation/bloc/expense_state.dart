@@ -14,7 +14,7 @@ abstract class ExpenseState extends Equatable{
 
   @override
   List<Object> get props {
-    return [expenses!, error!];
+    return [expenses!];
   }
 }
 
