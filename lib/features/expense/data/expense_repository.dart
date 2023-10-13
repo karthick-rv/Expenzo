@@ -1,15 +1,16 @@
 
 
-import 'package:expenzo/features/expense/data/expense.dart';
+import 'package:expenzo/features/expense/data/local/app_database.dart';
+import 'package:expenzo/features/expense/domain/expense.dart';
 
 import '../../../core/resources/data_state.dart';
 
 abstract class ExpenseRepository{
 
-  Future<DataState<List<Expense>>> getExpenses();
+  Future<DataState<List<ExpenseEntity>>> getExpenses();
 
-  void addExpense(Expense expense);
+  Future<DataState<void>> addExpense(ExpenseEntity expense);
 
-  Future<DataState<Expense>> editExpense(Expense expense);
+  Future<DataState<ExpenseEntity>> editExpense(ExpenseEntity expense);
 
 }

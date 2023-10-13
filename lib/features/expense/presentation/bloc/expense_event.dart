@@ -1,10 +1,10 @@
 
 
-import '../../data/expense.dart';
+import '../../domain/expense.dart';
 
 abstract class ExpenseEvent{
 
-  final Expense? expense;
+  final ExpenseEntity? expense;
 
   const ExpenseEvent({this.expense});
 }
@@ -14,9 +14,14 @@ class GetExpenses extends ExpenseEvent{
 }
 
 class AddExpense extends ExpenseEvent{
-  const AddExpense(Expense expense): super(expense: expense);
+  const AddExpense(ExpenseEntity expense): super(expense: expense);
 }
 
 class EditExpense extends ExpenseEvent{
-  const EditExpense(Expense expense): super(expense: expense);
+  const EditExpense(ExpenseEntity expense): super(expense: expense);
+}
+
+
+class LogOutEvent extends ExpenseEvent{
+  LogOutEvent();
 }

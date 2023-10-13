@@ -1,19 +1,53 @@
-import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
+import 'package:expenzo/features/expense/domain/expense.dart';
+import 'package:floor/floor.dart';
 
-class Expense extends Equatable {
-  final UniqueKey id = UniqueKey();
-  final String name;
-  final String? description;
-  final int amount;
-  DateTime date = DateTime.now();
-  final ExpenseCategory category ;
+@Entity(tableName: "expense")
+class ExpenseModel {
+  @PrimaryKey(autoGenerate: true)
+  int? id;
+  String? name;
+  String? description;
+  int? amount;
+  String? date;
+  String? category;
+  ExpenseModel({
+    this.id,
+    this.name,
+    this.description,
+    this.amount,
+    this.date,
+    this.category});
 
-  Expense({this.name = "",this.description = "", this.amount = 0, required this.date, this.category = ExpenseCategory.miscellaneous});
 
-  @override
-  List<Object?> get props => [name];
+  factory ExpenseModel.fromJson(Map<String, dynamic> map){
+    return ExpenseModel(
+      id: map["id"],
+      name: map["name"],
+      description: map["description"],
+      amount: map["amount"],
+      date: map["date"],
+      category: map["category"]
+    );
+  }
+
+  Map<String, dynamic> toJson(){
+    return {
+      "name": name,
+      "description": description,
+      "amount": amount,
+      "date": date,
+      "category": category
+    };
+  }
+
+
+  factory ExpenseModel.fromEntity(ExpenseEntity expenseEntity){
+    return ExpenseModel(
+      name: expenseEntity.name,
+      description: expenseEntity.description,
+      amount: expenseEntity.amount,
+      date: expenseEntity.date.toLocal().toString().split(" ")[0],
+      category: expenseEntity.category.name
+    );
+  }
 }
-
-
-enum ExpenseCategory {food, rent, dress, travel, entertainment, miscellaneous}

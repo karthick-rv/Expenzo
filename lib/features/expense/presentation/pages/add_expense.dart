@@ -1,9 +1,8 @@
 import 'dart:ffi';
 
-import 'package:expenzo/features/expense/data/expense.dart';
+import 'package:expenzo/features/expense/domain/expense.dart';
 import 'package:expenzo/features/expense/presentation/bloc/expense_bloc.dart';
 import 'package:expenzo/features/expense/presentation/bloc/expense_event.dart';
-import 'package:expenzo/features/expense/presentation/pages/expense_list.dart';
 import 'package:expenzo/features/expense/presentation/widgets/date_picker.dart';
 import 'package:expenzo/features/expense/presentation/widgets/dropdown.dart';
 import 'package:expenzo/features/expense/presentation/widgets/text_field.dart';
@@ -36,7 +35,15 @@ class AddExpensePageState extends State<AddExpensePage> {
         constraints: BoxConstraints(minHeight: viewportConstraints.maxHeight),
         child: Scaffold(
           appBar: buildAppBar(),
-          body: buildBody(),
+          body: Container(
+            height: double.infinity,
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(colors: [
+                    Theme.of(context).colorScheme.background,
+                    Theme.of(context).colorScheme.primary
+                  ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+            child: buildBody(),
+          )
         ),
       );
     });
@@ -45,6 +52,7 @@ class AddExpensePageState extends State<AddExpensePage> {
 
   AppBar buildAppBar(){
     return AppBar(
+        backgroundColor: Theme.of(context).colorScheme.primary,
       title: const Text('Add Expense'),
     );
   }
@@ -102,7 +110,7 @@ class AddExpensePageState extends State<AddExpensePage> {
             const SizedBox(height: 30),
             ElevatedButton(
                 onPressed: (){
-                 var expense =  Expense(
+                 var expense =  ExpenseEntity(
                       name: name,
                       description: desc,
                       amount: amount,

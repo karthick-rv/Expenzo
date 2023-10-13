@@ -1,32 +1,45 @@
-
-
-import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../data/expense.dart';
+import '../../domain/expense.dart';
 
-abstract class ExpenseState extends Equatable{
-
-  final List<Expense>? expenses;
-  final DioException? error;
+abstract class ExpenseState extends Equatable {
+  final List<ExpenseEntity>? expenses;
+  final String? error;
 
   const ExpenseState({this.expenses, this.error});
 
   @override
-  List<Object> get props {
-    return [expenses!];
+  List<Object?> get props {
+    return [expenses];
   }
 }
 
-
-class ExpenseLoading extends ExpenseState{
+class ExpenseLoading extends ExpenseState {
   const ExpenseLoading();
 }
 
-class ExpenseSuccess extends ExpenseState{
-  const ExpenseSuccess(List<Expense> expenses) : super(expenses: expenses);
+class ExpenseSuccess extends ExpenseState {
+  const ExpenseSuccess(List<ExpenseEntity> expenses)
+      : super(expenses: expenses);
 }
 
-class ExpenseError extends ExpenseState{
-  const ExpenseError(DioException error) : super(error: error);
+class ExpenseError extends ExpenseState {
+  const ExpenseError(List<ExpenseEntity> localExpenses, String errorMsg)
+      : super(expenses: localExpenses, error: errorMsg);
 }
+
+class AddExpenseSuccess extends ExpenseState{
+
+}
+
+class AddExpenseError extends ExpenseState{
+  const AddExpenseError(String errorMsg): super(error: errorMsg);
+}
+
+class AddExpenseLoading extends ExpenseState{
+  
+}
+
+class LogOutSuccess extends ExpenseState{}
+class LogOutError extends ExpenseState{}
+class LogOutLoading extends ExpenseState{}
