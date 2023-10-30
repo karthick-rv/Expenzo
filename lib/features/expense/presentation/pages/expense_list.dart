@@ -103,6 +103,11 @@ class ExpenseListState extends State<ExpenseList> {
           case ExpenseLoading:
             return const Center(child: CircularProgressIndicator());
           case ExpenseSuccess:
+            if(state.expenses!.isEmpty){
+              return Column(
+                children: [topBar(), const Expanded(child: Center(child: Text("No Expenses Found.", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold))))],
+              );
+            }
             var segregatedExpenses = _segregateExpenses(state.expenses!);
             return Column(
               children: [topBar(), PieChartWidget(expenseMap: segregatedExpenses), expenseList(state)],

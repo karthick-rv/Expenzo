@@ -159,7 +159,7 @@ class AuthScreenState extends State<AuthScreen> {
                       switch (state.runtimeType) {
                         case AuthSuccess:
                           if(state.userEntity?.isSignIn??false){
-                            showSnackBar(state.userEntity!.token);
+                            // showSnackBar(state.userEntity!.token);
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
                                 builder: (context) => const ExpenseList(),

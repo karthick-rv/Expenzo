@@ -1,16 +1,33 @@
-# expenzo
+# Expenzo
 
-A new Flutter project.
+**This is the Expense tracker app which lists all the expenses of the user**
 
-## Getting Started
+## Tech stack
+- Flutter, Bloc, Retrofit Dio, Floor, User Preference
 
-This project is a starting point for a Flutter application.
+## Features
+- Lists all the expenses of the user
+- Visualizes expenses in the form of chart
+- Add expense with description and date
+- Login with email and password
+- Logout the user
 
-A few resources to get you started if this is your first Flutter project:
+## Screens
+- **Auth Screens**
+<p float="left">
+  <img src="screenshots/login.png" width="130"/>
+  <img src="screenshots/login-2.png" width="130"/>
+</p>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **Expense Dashboard screen**
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<p float="left">
+  <img src="screenshots/expenses.png" width="130"/>
+</p>
+
+
+- **Add Expense screen**
+
+<p float="left">
+  <img src="screenshots/add-expense.png" width="130"/>
+</p>

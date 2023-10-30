@@ -52,15 +52,17 @@ class ExpenseRepositoryImpl extends ExpenseRepository {
       await expenseDao.deleteAll();
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
-        final futureExpenses = httpResponse.data.map((e) async{
-          await expenseDao.insertExpense(e);
-        });
+        // final futureExpenses = httpResponse.data.map((e) async{
+        //   await expenseDao.insertExpense(e);
+        // });
 
-        Future.wait(futureExpenses);
+        // Future.wait(futureExpenses);
 
-        final expenseEntities = await fetchLocalExpenses();
+        // final expenseEntities = await fetchLocalExpenses();
 
-        return DataSuccess(expenseEntities);
+        final expenses = httpResponse.data.map((e) => ExpenseEntity.fromExpenseModel(e)).toList();
+
+        return DataSuccess(expenses);
       } else {
         final expenseEntities = await fetchLocalExpenses();
         return DataFailed(expenseEntities, "Api Failed - Showing Local data");
